@@ -12,7 +12,7 @@ public class ConnectionProvider {
 	                // Driver class load
 	                Class.forName("com.mysql.jdbc.Driver");
 	                // Create Connection
-	                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/techblog", "root", "*****");
+	                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/techblog", "root", "******");
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
