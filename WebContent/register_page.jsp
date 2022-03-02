@@ -97,5 +97,70 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+ <script>
+            $(document).ready(function () {
+                console.log("loaded........")
+
+                $('#reg-form').on('submit', function (event) {
+                    event.preventDefault();
+
+
+
+                    let form = new FormData(this);
+
+                    $("#sumbimt-btn").hide();
+                    $("#loader").show();
+                    //send register servlet:
+                    $.ajax({
+                        url: "RegisterServlet",
+                        type: 'POST',
+                        data: form,
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data)
+
+                            $("#sumbimt-btn").show();
+                            $("#loader").hide();
+
+                            if (data.trim() === 'done')
+                            {
+
+                                swal("Registered successfully..We are going to redirect to login page")
+                                        .then((value) => {
+                                            window.location = "login_page.jsp"
+                                        });
+                            } else
+                            {
+
+                                swal(data);
+                            }
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#sumbimt-btn").show();
+                            $("#loader").hide();
+                            swal("something went wrong..try again");
+
+                        },
+                        processData: false,
+                        contentType: false
+
+                    });
+
+
+
+                });
+
+
+            });
+
+
+
+        </script>
+
+
+
+
 </body>
 </html>
