@@ -1,11 +1,18 @@
 package com.techBlog.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.techBlog.Dao.UserDao;
+import com.techBlog.entities.User;
+import com.techBlog.helper.ConnectionProvider;
 
 /**
  * Servlet implementation class LoginServlet
@@ -35,7 +42,28 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		 try (PrintWriter out = response.getWriter()) {
+			// login
+			// fetch username and password from request
+			String userEmail = request.getParameter ("email");
+			String userPassword = request.getParameter ("password");
+			UserDao dao=new UserDao (ConnectionProvider.getConnection ());
+			User u=dao.getUserByUserEmailAndPassword(userEmail, userPassword);
+			if(u==null)
+			{
+				//error
+				out.println("Invalid Data");
+			}
+			else
+			{
+				HttpSession s=request.getSession();
+				s.setAttribute("user", u);
+				response.sendRedirect("profile.jsp");
+			}
+		 }
+		 
+		 
 	}
 
 }

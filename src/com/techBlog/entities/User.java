@@ -8,6 +8,17 @@ public class User {
 	private String password;
 	private String gender;
 	private String about;
+	private String profile;
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public User(String name, String email, String password, String gender, String about) {
 		super();
 		this.name = name;
