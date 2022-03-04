@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.techBlog.Dao.UserDao;
+import com.techBlog.entities.Message;
 import com.techBlog.entities.User;
 import com.techBlog.helper.ConnectionProvider;
 
@@ -53,7 +54,11 @@ public class LoginServlet extends HttpServlet {
 			if(u==null)
 			{
 				//error
-				out.println("Invalid Data");
+				//out.println("Invalid Data");
+				Message msg=new Message("Invalid Details! Try with another", "error", "alert-danger");
+				HttpSession s=request.getSession();
+				s.setAttribute("msg", msg);
+				response.sendRedirect("login_page.jsp");
 			}
 			else
 			{
