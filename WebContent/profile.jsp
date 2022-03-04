@@ -22,7 +22,7 @@ if(u==null)
 </head>
 <body>
 
-
+<!--  Start of Navbar  -->
 <nav class="navbar navbar-expand-lg navbar-dark primary_background">
   <a class="navbar-brand" href="#"><span class="fa fa-asterisk"></span>Teck Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@ if(u==null)
     </ul>
     <ul class="navbar-nav mr-right">
      <li class="nav-item">
-        <a class="nav-link" href="login_page.jsp"><span class="fa fa-user-circle"></span> <%=u.getName() %></a>
+        <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModal" ><span class="fa fa-user-circle"></span> <%=u.getName() %></a>
       </li>
      <li class="nav-item">
         <a class="nav-link" href="LogoutServlet"><span class="fa fa-user-plus"></span>  Logout</a>
@@ -62,6 +62,65 @@ if(u==null)
     
   </div>
 </nav>
+<!-- End of Navbar -->
+
+
+ <!-- Model  -->
+ 
+ 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header primary_background text-white">
+        <h5 class="modal-title" id="exampleModalLabel">TechBlog</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+       <div class="container text-center">
+       <img src="pics/<%=u.getProfile() %>"   style="border-radius:50%; max-width: 150px">
+      
+       
+        <h5 class="modal-title" id="exampleModalLabel"><%=u.getName() %></h5>
+        <!-- Details -->
+        <table class="table">
+ 
+  <tbody>
+    <tr>
+      <th scope="row">ID</th>
+      <td><%=u.getId() %></td>
+      
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%=u.getEmail() %></td>
+     
+    </tr>
+    <tr>
+      <th scope="row">Gender</th>
+      <td><%=u.getGender() %></td>
+     
+    </tr>
+     <tr>
+      <th scope="row">About</th>
+      <td><%=u.getAbout() %></td>
+     
+    </tr>
+  </tbody>
+</table>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
