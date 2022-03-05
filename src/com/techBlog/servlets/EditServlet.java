@@ -1,5 +1,6 @@
 package com.techBlog.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.techBlog.Dao.UserDao;
+import com.techBlog.entities.Message;
 import com.techBlog.entities.User;
 import com.techBlog.helper.ConnectionProvider;
+import com.techBlog.helper.Helper;
 
 /**
  * Servlet implementation class EditServlet
@@ -59,18 +62,45 @@ public class EditServlet extends HttpServlet {
 			 u.setName(userName);
 			 u.setPassword(userPassword);
 			 u.setAbout(about);
+			 String oldFile = u.getProfile();
 			 u.setProfile(image);
 			 UserDao uDao=new UserDao(ConnectionProvider.getConnection());
 			 boolean result=uDao.updateUser(u);
 			 if(result)
 			 {
 				 out.println("Updated....");
-			 }
+				 
+				 String path=request.getRealPath("/")+"pics"+File.separator+u.getProfile();
+				 String pathOldFile = request.getRealPath("/") + "pics" + File.separator + oldFile;
+
+	                if (!oldFile.equals("default.png")) {
+	                    Helper.deleteFile(pathOldFile);
+	                }
+				
+					 if(Helper.saveFile(part.getInputStream(), path)) {
+						// out.println("Profile update...");
+						 Message msg=new Message("Profile Photo Updated", "success", "alert-success");
+							
+							s.setAttribute("msg", msg);
+					 }
+					 else {
+						 Message msg=new Message("Something went wrong!", "error", "alert-danger");
+							
+							s.setAttribute("msg", msg);
+						// out.println("Profile not saved update...");
+					 }
+				 }
+				
+			 
 			 
 			 else
 			 {
-				 out.println("Not updated");
+				 //out.println("Not updated");
+				 Message msg=new Message("Something went wrong!r", "error", "alert-danger");
+					//HttpSession s=request.getSession();
+					s.setAttribute("msg", msg);
 			 }
+			 response.sendRedirect("profile.jsp");
 		 }
 	}
 

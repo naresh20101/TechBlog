@@ -63,6 +63,22 @@ if(u==null)
   </div>
 </nav>
 <!-- End of Navbar -->
+  <%
+         Message m=(Message)session.getAttribute("msg");
+         if(m!=null)
+         {
+        	 %>
+        	  <div class="alert <%=m.getCssClass() %>" role="alert">
+				  
+				  <%=m.getContent() %>
+		</div>
+		<% 
+		  session.removeAttribute("msg");
+         }
+        
+         
+         
+         %>
 
 
  <!-- Model  -->
