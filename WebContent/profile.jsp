@@ -69,7 +69,7 @@ if(u==null)
  
  
 
-
+<div class="container mt-auto">
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -87,6 +87,8 @@ if(u==null)
        
         <h5 class="modal-title" id="exampleModalLabel"><%=u.getName() %></h5>
         <!-- Details -->
+       <div id="profile_Details">
+       
         <table class="table">
  
   <tbody>
@@ -112,14 +114,67 @@ if(u==null)
     </tr>
   </tbody>
 </table>
+</div>
+<div id="editProfile" style="display: none;">
+                
+                 <h3 class="mt-2">Please Edit Carefully</h3>
+                                <form action="EditServlet" method="post" enctype="multipart/form-data">
+                                    <table class="table">
+                                        <tr>
+                                            <td>ID :</td>
+                                            <td><%= u.getId()%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email :</td>
+                                            <td> <input type="email" class="form-control" name="user_email" value="<%= u.getEmail()%>" > </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name :</td>
+                                            <td> <input type="text" class="form-control" name="user_name" value="<%= u.getName()%>" > </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password :</td>
+                                            <td> <input type="password" class="form-control" name="user_password" value="<%= u.getPassword()%>" > </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender :</td>
+                                            <td> <%= u.getGender().toUpperCase()%> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>About  :</td>
+                                            <td>
+                                                <textarea rows="3" class="form-control" name="user_about" ><%= u.getAbout()%>
+                                                </textarea>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Profile:</td>
+                                            <td>
+                                                <input type="file" name="image" class="form-control" >
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                    <div class="container">
+                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                    </div>
+
+                                </form>    
+                
+                
+                
+			</div>
        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Edit</button>
+        <button type="button" id="edit_button" class="btn btn-primary">Edit</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -129,5 +184,35 @@ if(u==null)
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script type="text/javascript">
+
+ $(document).ready(function(){
+	 let statusbtn=false;
+	 // alert("testing");
+	 $('#edit_button').click(function(){
+		 if(statusbtn==false)
+			{
+				$('#profile_Details').hide();
+				$('#editProfile').show();
+				$(this).text("Back");
+				statusbtn=true;
+				
+			}
+		 else
+			 {
+			 $('#profile_Details').show();
+				$('#editProfile').hide();
+				$(this).text("Edit");
+				statusbtn=false;
+			 }
+          //alert("button clicked");
+		 })
+	 });
+</script>
+
+
+
+
+
 </body>
 </html>

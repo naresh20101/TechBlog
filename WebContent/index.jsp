@@ -22,7 +22,7 @@
            <p>People from different walks of life are intrigued by the way technology is progressing at a profuse rate, shaping our lives into the digital world!</p>
             <p>With new tech trends being introduced every quarter and information becoming obsolete as technology evolves, it’s now an obligation to stay relevant and learn about the newest technologies, digital industry, social media, and the web in general!</p>
                     <a href="register_page.jsp" class="btn btn-outline-light btn-lg"> <span class="fa fa-user-plus"></span> Start ! it's Free</a>
-                    <a href="login.jsp" class="btn btn-outline-light btn-lg"><span class="fa fa-user-circle fa-spin"></span> Login</a>
+                    <a href="login_page.jsp" class="btn btn-outline-light btn-lg"><span class="fa fa-user-circle fa-spin"></span> Login</a>
       </div>
    </div>
    </div>
