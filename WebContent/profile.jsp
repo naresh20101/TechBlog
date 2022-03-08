@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.techBlog.helper.ConnectionProvider"%>
+<%@page import="com.techBlog.Dao.PostDao"%>
 <%@page import="com.techBlog.entities.*"%>
 <%@page errorPage="error_page.jsp" %>
 <%
@@ -48,6 +51,9 @@ if(u==null)
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><span class="fa fa-address-book-o"></span>Contact</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#"  data-toggle="modal" data-target="#doPostModel"><span class="fa fa-asterisk"></span>Post</a>
       </li>
       
     </ul>
@@ -192,7 +198,55 @@ if(u==null)
   </div>
 </div>
 </div>
+<!-- Post Model -->
 
+<div class="modal fade" id="doPostModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Provide the post details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="AddServlet" method="post">
+           <div class="form-group">
+           <select class="form-control">
+             <option selected disabled>----Select Categories----</option>
+             <%
+               PostDao postDao=new PostDao(ConnectionProvider.getConnection());
+             ArrayList<Categories> list=postDao.getAllCategories();
+             for(Categories c:list)
+             {%>
+               <option><%=c.getName() %></option>
+            <%  }%>
+            
+             
+           </select>
+          </div>
+          <div class="form-group">
+           <input type="text" placeholder="Enter post title" class="form-control">
+           </div>
+           <div class="form-group">
+           <textarea type="text" placeholder="Enter your content" class="form-control"></textarea>
+          </div>
+           <div class="form-group">
+           <textarea type="text" placeholder="Enter your programm(if any)" class="form-control"></textarea>
+          </div>
+           <div class="form-group">
+           <label>Select your pic</label>
+         <input type="file">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Java script -->
