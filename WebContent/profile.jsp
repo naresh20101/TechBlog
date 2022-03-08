@@ -210,9 +210,9 @@ if(u==null)
         </button>
       </div>
       <div class="modal-body">
-        <form action="AddServlet" method="post">
+        <form action="AddPostServlet" method="post" id="add-post-form">
            <div class="form-group">
-           <select class="form-control">
+           <select class="form-control" name="cid">
              <option selected disabled>----Select Categories----</option>
              <%
                PostDao postDao=new PostDao(ConnectionProvider.getConnection());
@@ -226,24 +226,24 @@ if(u==null)
            </select>
           </div>
           <div class="form-group">
-           <input type="text" placeholder="Enter post title" class="form-control">
+           <input type="text" name="title" placeholder="Enter post title" class="form-control">
            </div>
            <div class="form-group">
-           <textarea type="text" placeholder="Enter your content" class="form-control"></textarea>
+           <textarea type="text" name="content" placeholder="Enter your content" class="form-control"></textarea>
           </div>
            <div class="form-group">
-           <textarea type="text" placeholder="Enter your programm(if any)" class="form-control"></textarea>
+           <textarea type="text" name="code"  placeholder="Enter your programm(if any)" class="form-control"></textarea>
           </div>
            <div class="form-group">
            <label>Select your pic</label>
-         <input type="file">
+           <input type="file" name="pic">
+          </div>
+          <div class="container text-center">
+            <button type="submit" class="btn btn-outline-primary">Post</button>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+     
     </div>
   </div>
 </div>
@@ -278,6 +278,30 @@ if(u==null)
           //alert("button clicked");
 		 })
 	 });
+</script>
+<!-- adding posts -->
+<script type="text/javascript">
+ $(document).ready(function(){
+	// alert("loaded");
+		$("#add-post-form").on("submit",function(event){
+			
+		   event.preventDefault();
+		   console.log("clicked");
+		   let form=new FormData(this);
+		    $.ajax({
+			    url:"AddPostServlet",
+			    type:"POST",
+			    data:form,
+			    success: function(data,textStatus,jqXHR){
+				    },
+				    error:function(jqXHR,textStatus,errorThrown){
+					    },
+					   processData:false,
+						contentType:false
+			    })
+			})
+		
+	 })
 </script>
 
 
