@@ -10,7 +10,8 @@ public class Posts {
 	private String pic;
 	private Timestamp date;
 	private int cId;
-	public Posts(int pId, String title, String content, String code, String pic, Timestamp date, int cId) {
+	private int userId;
+	public Posts(int pId, String title, String content, String code, String pic, Timestamp date, int cId, int userId) {
 		super();
 		this.pId = pId;
 		this.title = title;
@@ -19,12 +20,13 @@ public class Posts {
 		this.pic = pic;
 		this.date = date;
 		this.cId = cId;
+		this.userId=userId;
 	}
 	public Posts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Posts(String title, String content, String code, String pic, Timestamp date, int cId) {
+	public Posts(String title, String content, String code, String pic, Timestamp date, int cId,int userId) {
 		super();
 		this.title = title;
 		this.content = content;
@@ -32,6 +34,7 @@ public class Posts {
 		this.pic = pic;
 		this.date = date;
 		this.cId = cId;
+		this.userId=userId;
 	}
 	public int getpId() {
 		return pId;
@@ -74,6 +77,12 @@ public class Posts {
 	}
 	public void setcId(int cId) {
 		this.cId = cId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	

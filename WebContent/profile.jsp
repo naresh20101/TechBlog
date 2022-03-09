@@ -210,7 +210,7 @@ if(u==null)
         </button>
       </div>
       <div class="modal-body">
-        <form action="AddPostServlet" method="post" id="add-post-form">
+        <form action="AddPostServlet" method="POST" id="add-post-form">
            <div class="form-group">
            <select class="form-control" name="cid">
              <option selected disabled>----Select Categories----</option>
@@ -219,7 +219,7 @@ if(u==null)
              ArrayList<Categories> list=postDao.getAllCategories();
              for(Categories c:list)
              {%>
-               <option><%=c.getName() %></option>
+               <option value=<%=c.getcId() %>><%=c.getName() %></option>
             <%  }%>
             
              
@@ -281,7 +281,7 @@ if(u==null)
 </script>
 <!-- adding posts -->
 <script type="text/javascript">
- $(document).ready(function(){
+ $(document).ready(function(e){
 	// alert("loaded");
 		$("#add-post-form").on("submit",function(event){
 			
@@ -289,10 +289,12 @@ if(u==null)
 		   console.log("clicked");
 		   let form=new FormData(this);
 		    $.ajax({
-			    url:"AddPostServlet",
-			    type:"POST",
-			    data:form,
+			    url: "AddPostServlet",
+			    type: 'POST',
+			    data: form,
 			    success: function(data,textStatus,jqXHR){
+				    console.log(data);
+				    console.log("hii...");
 				    },
 				    error:function(jqXHR,textStatus,errorThrown){
 					    },

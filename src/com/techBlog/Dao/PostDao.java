@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.techBlog.entities.Categories;
+import com.techBlog.entities.Posts;
 
 import java.sql.*;
 
@@ -34,6 +35,28 @@ public class PostDao {
 	    		e.printStackTrace();
 			}
 	    	return list;
+	    }
+	    public boolean savePost(Posts posts) {
+	    	boolean f=false;
+	    	try {
+	    		String query="insert into posts(title,content,code,pic,cid,userId) values(?,?,?,?,?,?)";
+	    		PreparedStatement ps=con.prepareStatement(query);
+	    		ps.setString(1, posts.getTitle());
+	    		ps.setString(2, posts.getContent());
+	    		ps.setString(3, posts.getCode());
+	    		ps.setString(4, posts.getPic());
+	    		ps.setInt(5, posts.getcId());
+	    		ps.setInt(6, posts.getUserId());
+	    		ps.executeUpdate();
+	    		f=true;
+	    	}
+	    	catch (Exception e) {
+				// TODO: handle exception
+	    		e.printStackTrace();
+			}
+	    
+	    	return f;
+	    	
 	    }
 
 }
