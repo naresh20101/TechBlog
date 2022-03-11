@@ -62,7 +62,7 @@ public class AddPostServlet extends HttpServlet {
 			 PostDao postDao=new PostDao(ConnectionProvider.getConnection());
 			if( postDao.savePost(posts))
 			{
-				out.println("done");
+				//out.println("done");
 				 String pathOldFile = request.getRealPath("/") + "pics" + File.separator + part.getSubmittedFileName();
 				 Helper.saveFile(part.getInputStream(),pathOldFile);
 				 out.println("done");
