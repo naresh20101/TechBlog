@@ -2,6 +2,7 @@ package com.techBlog.Dao;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.techBlog.entities.Categories;
 import com.techBlog.entities.Posts;
@@ -57,6 +58,66 @@ public class PostDao {
 	    
 	    	return f;
 	    	
+	    }
+	    public List<Posts> getAllPosts()
+	    {
+	    	
+	    	List<Posts> list=new ArrayList<>();
+	    	try {
+	    		String query="select * from posts order by id desc";
+	    		PreparedStatement p=con.prepareStatement(query);
+	    		ResultSet set=p.executeQuery();
+	    		while(set.next())
+	    		{
+	    			int pId=set.getInt("id");
+	    			String title=set.getString("title");
+	    			String content=set.getString("content");
+	    			String code=set.getString("code");
+	    			String pic=set.getString("pic");
+	    			Timestamp date=set.getTimestamp("Date");
+	    			int cId=set.getInt("cid");
+	    			int userId=set.getInt("userId");
+	    			Posts posts=new Posts(pId, title, content, code, pic, date, cId, userId);
+	    			list.add(posts);
+	    			
+	    		}
+	    		
+	    	}
+	    	catch (Exception e) {
+				// TODO: handle exception
+	    		e.printStackTrace();
+			}
+	    	return list;
+	    }
+	    public List<Posts> getAllPostsById(int cId)
+	    {
+	    	List<Posts> list=new ArrayList<>();
+	    	try {
+	    		String query="select * from posts where cid=?";
+	    		PreparedStatement p=con.prepareStatement(query);
+	    		p.setInt(1, cId);
+	    		ResultSet set=p.executeQuery();
+	    		while(set.next())
+	    		{
+	    			int pId=set.getInt("id");
+	    			String title=set.getString("title");
+	    			String content=set.getString("content");
+	    			String code=set.getString("code");
+	    			String pic=set.getString("pic");
+	    			Timestamp date=set.getTimestamp("Date");
+	    			
+	    			int userId=set.getInt("userId");
+	    			Posts posts=new Posts(pId, title, content, code, pic, date, cId, userId);
+	    			list.add(posts);
+	    			
+	    		}
+	    		
+	    	}
+	    	catch (Exception e) {
+				// TODO: handle exception
+	    		e.printStackTrace();
+			}
+	    	return list;
 	    }
 
 }

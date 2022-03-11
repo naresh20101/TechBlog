@@ -108,6 +108,12 @@ if(u==null)
 	     </div>
 	   <div class="col-md-8">
 	   <!-- Posts -->
+	    <div class="container text-center" id="loader">
+	     <i class="fa fa-refresh fa-4x fa-spin"></i>
+	     <h3 class="mt-2">Loading...</h3>
+	    </div>
+	    <div class="container-fluid" id="post-container">
+	    </div>
 	   
 	   </div>
       
@@ -346,7 +352,24 @@ if(u==null)
 	 })
 </script>
 
+<!-- Loadng posts -->
+<script type="text/javascript">
+$(document).ready(function(e){
+	alert("loading");
+	$.ajax({
+		url:"load_posts.jsp",
+		 success: function(data,textStatus,jqXHR){
+			 console.log(data);
+			 $("#loader").hide();
+			 $("#post-container").html(data);
+			 
+		 }
+		})
+		
+		
+})
 
+</script>
 
 
 
