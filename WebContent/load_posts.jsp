@@ -1,3 +1,4 @@
+<%@page import="com.sun.org.apache.bcel.internal.generic.INEG"%>
 <%@page import="java.util.List"%>
 <%@page import="com.techBlog.entities.Posts"%>
 <%@page import="com.techBlog.helper.ConnectionProvider"%>
@@ -5,8 +6,23 @@
 <div class="row">
 
 <% 
+Thread.sleep(500);
+  
   PostDao d=new PostDao(ConnectionProvider.getConnection());
-   List<Posts> posts=d.getAllPosts();
+ int cId=Integer.parseInt(request.getParameter("cid"));
+System.out.println("cid ::"+ cId);
+List<Posts> posts=null;
+  if(cId==0){
+   posts=d.getAllPosts();
+  }
+  else{
+	  posts=d.getAllPostsById(cId);
+  }
+  if(posts.size()==0)
+  {
+	  out.println("<h3 class='display-3 text-center'>No posts in this category</h3>");
+	  return;
+  }
    for(Posts p:posts)
    {
 	   

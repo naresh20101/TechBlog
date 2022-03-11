@@ -93,7 +93,7 @@ if(u==null)
 	     <div class="col-md-4 mt-4">
 	      <!-- categories -->
 	     <div class="list-group">
-		  <a href="#" class="list-group-item list-group-item-action active">
+		  <a href="#" onclick="getPosts(0)" class="list-group-item list-group-item-action active">
 		    All Posts
 		  </a>
 		   <%
@@ -101,7 +101,7 @@ if(u==null)
              ArrayList<Categories> list1=postDao1.getAllCategories();
              for(Categories cc:list1)
              {%>
-		  <a href="#" class="list-group-item list-group-item-action"><%=cc.getName() %></a>
+		  <a href="#" onclick="getPosts(<%=cc.getcId() %>)" class="list-group-item list-group-item-action"><%=cc.getName() %></a>
 		  <%} %>
 		 
          </div>
@@ -354,17 +354,24 @@ if(u==null)
 
 <!-- Loadng posts -->
 <script type="text/javascript">
-$(document).ready(function(e){
-	alert("loading");
+ function getPosts(catId){ 
+	 $("#loader").show();
+	 $("#post-container").hide();
 	$.ajax({
 		url:"load_posts.jsp",
+		data:{cid:catId},
 		 success: function(data,textStatus,jqXHR){
 			 console.log(data);
+			 
 			 $("#loader").hide();
+			 $("#post-container").show();
 			 $("#post-container").html(data);
 			 
 		 }
 		})
+}
+		$(document).ready(function(e){
+	      getPosts(0)
 		
 		
 })
